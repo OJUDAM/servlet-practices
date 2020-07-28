@@ -7,9 +7,10 @@
 		<artifactId>servlet-practices</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>emaillist01</artifactId>
+	<artifactId>guestbook01</artifactId>
 	<packaging>war</packaging>
-
+	
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
@@ -18,8 +19,5 @@
 		</dependency>
 
 	</dependencies>
-
-	<build>
-		<finalName>emaillist01</finalName>
-	</build>
+	
 </project>
