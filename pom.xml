@@ -34,5 +34,6 @@
 
 	<modules>
 		<module>helloweb</module>
+		<module>emaillist01</module>
 	</modules>
 </project>
