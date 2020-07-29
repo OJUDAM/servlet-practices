@@ -5,14 +5,62 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.bit2020.guestbook.vo.GuestBookVo;
 
 public class GuestBookDao {
+	public boolean delete(Long no, String password) {
+		boolean result = false;
+		Connection connection = null;
+		/* Statement stmt = null; */
+		PreparedStatement pstmt = null;
+		try {
+			//1 연결하기
+			connection = getConnection();
+			
+			/*
+			 * // 3. Statement 객체 생성 sql 실행하기 위해서 stmt = connection.createStatement();
+			 */
 
+			// 3. SQL 준비
+			String sql = "delete from guestbook where no = ? and password = ?";
+			pstmt = connection.prepareStatement(sql);
+
+			// 4. 바인딩
+			pstmt.setLong(1, no);
+			pstmt.setString(2, password);
+
+			// 5. sql 실행
+			int count = pstmt.executeUpdate();
+			result = (count == 1);
+
+			/*
+			 * // 4. SQL 실행 String sql1 =
+			 * "insert into guestbook values(null,'"+vo.getName()+"','"+vo.getPassword()+
+			 * "',now(),'"+vo.getMessage()+"')"; int count = stmt.executeUpdate(sql1);
+			 * result =(count == 1);
+			 */
+		}  catch (SQLException e) {
+			System.out.println("에러 : " + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+
+	}
 	public boolean insert(GuestBookVo vo) {
 		boolean result = false;
 		Connection connection = null;
@@ -74,7 +122,7 @@ public class GuestBookDao {
 			
 			// 3. Statement 객체 생성 sql 실행하기 위해서
 			// 4. SQL 실행
-			String sql = "select no, name, message, date_format(reg_date, '%Y-%m-%d %h:%i:%s') from guestbook order by reg_date desc";
+			String sql = "select no, name, date_format(reg_date, '%Y-%m-%d %h:%i:%s'),message from guestbook order by reg_date desc";
 			// String sqlcount = "select count(*) from guestbook";
 			
 			stmt = connection.prepareStatement(sql);
@@ -85,14 +133,11 @@ public class GuestBookDao {
 				String name = rs.getString(2);
 				String message = rs.getString(3);
 				String regDate = rs.getString(4);
-				System.out.println(no);
 				GuestBookVo vo = new GuestBookVo();
 				vo.setNo(no);
 				vo.setName(name);
 				vo.setMessage(message);
-				;
 				vo.setRegDate(regDate);
-				;
 
 				result.add(vo);
 			}
