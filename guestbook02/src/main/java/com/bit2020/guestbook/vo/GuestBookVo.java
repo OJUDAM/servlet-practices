@@ -1,4 +1,4 @@
-package com.bit2020.guestbook01.vo.guestbookvo;
+package com.bit2020.guestbook.vo;
 
 public class GuestBookVo {
 	private long no;
@@ -6,7 +6,6 @@ public class GuestBookVo {
 	private String password;
 	private String regDate;
 	private String message;
-	public static int count;
 	
 	public long getNo() {
 		return no;

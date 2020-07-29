@@ -14,7 +14,7 @@ public class GuestBookDaoTest {
 	}
 	public static void testSelectList() {
 		List<GuestBookVo> list = new GuestBookDao().findAll();
-		
+		System.out.println(GuestBookVo.count);
 		if(list.size() == 1) {
 			System.out.println("성공");
 		}else {

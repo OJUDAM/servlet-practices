@@ -1,10 +1,9 @@
-<%@page import="com.bit2020.guestbook01.dao.guestbookDao.GuestBookDao"%>
+<%@page import="com.bit2020.guestbook.vo.GuestBookVo"%>
 <%@page import="java.util.List"%>
-<%@page import="com.bit2020.guestbook01.vo.guestbookvo.GuestBookVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    	List<GuestBookVo> list = new GuestBookDao().findAll();
+    	List<GuestBookVo> list =(List<GuestBookVo>)request.getAttribute("list");
     %>
 <html>
 <head>
@@ -26,7 +25,6 @@
 		</tr>
 	</table>
 	</form>
-	<h1>갯수 : <%=GuestBookVo.count%></h1>
 	<%
 		for(GuestBookVo vo : list){
 	%>
@@ -34,7 +32,7 @@
 	<br>
 	<table width=510 border=1>
 		<tr>
-			<td><%=vo.getNo()%></td>
+			<td>[ <%=vo.getNo()%> ]</td>
 			<td><%=vo.getName()%></td>
 			<td><%=vo.getRegDate()%></td>
 			<td><a href="">삭제</a></td>

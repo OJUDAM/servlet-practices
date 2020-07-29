@@ -73,9 +73,10 @@ public class GuestBookDao {
 			
 			// 4. SQL 실행
 			String sql = "select no, name, message, date_format(reg_date, '%Y-%m-%d %h:%i:%s') from guestbook";
-					
+			String sqlcount = "select count(*) from guestbook";
 			
 			rs = stmt.executeQuery(sql);
+			
 			
 			while(rs.next()) {
 				Long no = rs.getLong(1);
@@ -91,6 +92,10 @@ public class GuestBookDao {
 				
 				result.add(vo);
 			}
+			rs = stmt.executeQuery(sqlcount);
+			rs.next();
+			int count = rs.getInt(1);
+			GuestBookVo.count=count;
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
 		} catch (SQLException e) {
