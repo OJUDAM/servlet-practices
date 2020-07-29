@@ -131,8 +131,9 @@ public class GuestBookDao {
 			while (rs.next()) {
 				Long no = rs.getLong(1);
 				String name = rs.getString(2);
-				String message = rs.getString(3);
-				String regDate = rs.getString(4);
+				String regDate = rs.getString(3);
+				String message = rs.getString(4);
+				
 				GuestBookVo vo = new GuestBookVo();
 				vo.setNo(no);
 				vo.setName(name);
